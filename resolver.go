@@ -4,6 +4,7 @@ package gqlgen_todos
 
 import (
 	context "context"
+	"errors"
 	"fmt"
 	"math/rand"
 )
@@ -26,6 +27,16 @@ func (r *Resolver) Todo() TodoResolver {
 type mutationResolver struct{ *Resolver }
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input NewTodo) (*Todo, error) {
+	var user *User
+	for _, u := range r.users {
+		if u.ID == input.UserID {
+			user = u
+		}
+	}
+	if user == nil {
+		return &Todo{}, errors.New("no user found")
+	}
+
 	todo := &Todo{
 		Text:   input.Text,
 		ID:     fmt.Sprintf("T%d", rand.Int()),
@@ -37,8 +48,9 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input NewTodo) (*Todo
 
 func (r *mutationResolver) CreateUser(ctx context.Context, input NewUser) (*User, error) {
 	user := &User{
-		ID:   fmt.Sprintf("T%d", rand.Int()),
-		Name: input.Name,
+		ID:       fmt.Sprintf("T%d", rand.Int()),
+		Name:     input.Name,
+		Password: input.Password,
 	}
 	r.users = append(r.users, user)
 	return user, nil
