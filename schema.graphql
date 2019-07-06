@@ -13,6 +13,7 @@ type Todo {
 type User {
   id: ID!
   name: String!
+  password: String!
 }
 
 type Query {
@@ -29,6 +30,7 @@ input NewTodo {
 input NewUser {
   id: String!
   name: String!
+  password: String!
 }
 
 type Mutation {
