@@ -1,0 +1,12 @@
+type Todo {
+    id: ID!
+    text: String!
+    done: Boolean!
+    user: User!
+}
+
+# こういうものはmodels_genに自動で生成してくれるのか！！
+input NewTodo {
+    text: String!
+    userId: String!
+}

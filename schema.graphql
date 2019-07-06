@@ -3,35 +3,13 @@
 # https://gqlgen.com/getting-started/
 
 # Todoは定義しているけど、gqlgen.ymlで設定したから自動生成はされないということか！
-type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
-}
-
-type User {
-  id: ID!
-  name: String!
-  password: String!
-}
 
 type Query {
   todos: [Todo!]!
   users: [User!]!
 }
 
-# こういうものはmodels_genに自動で生成してくれるのか！！
-input NewTodo {
-  text: String!
-  userId: String!
-}
 
-input NewUser {
-  id: String!
-  name: String!
-  password: String!
-}
 
 type Mutation {
   createTodo(input: NewTodo!): Todo!
