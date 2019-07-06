@@ -2,6 +2,11 @@
 
 package gqlgen_todos
 
+type Company struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
 type NewTodo struct {
 	Text   string `json:"text"`
 	UserID string `json:"userId"`
@@ -14,7 +19,8 @@ type NewUser struct {
 }
 
 type User struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Password string `json:"password"`
+	ID       string   `json:"id"`
+	Name     string   `json:"name"`
+	Password string   `json:"password"`
+	Company  *Company `json:"company"`
 }
