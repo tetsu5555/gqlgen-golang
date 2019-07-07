@@ -66,6 +66,15 @@ func (r *queryResolver) Users(ctx context.Context) ([]*User, error) {
 	return r.users, nil
 }
 
+func (r *queryResolver) User(ctx context.Context, id string) (*User, error) {
+	for _, u := range r.users {
+		if u.ID == id {
+			return u, nil
+		}
+	}
+	return &User{}, errors.New("user not found")
+}
+
 type todoResolver struct{ *Resolver }
 
 func (r *todoResolver) User(ctx context.Context, obj *Todo) (*User, error) {

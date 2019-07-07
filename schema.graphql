@@ -6,10 +6,10 @@
 
 type Query {
   todos: [Todo!]!
+  Todo(ID: String): Todo!
   users: [User!]!
+  user(ID: String!): User!
 }
-
-
 
 type Mutation {
   createTodo(input: NewTodo!): Todo!
